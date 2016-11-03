@@ -3,6 +3,7 @@ class CreateAnswers < ActiveRecord::Migration
       create_table :answers do |t|
          t.integer :question_id
          t.text :body, null: false
+         t.integer :user_id
 
          t.timestamps null: false
       end
