@@ -6,9 +6,9 @@ Answer.delete_all
 Comment.delete_all
 
 20.times do |idx|
-  User.create(:username => Faker::Internet.user_name,
+  User.create({:username => Faker::Internet.user_name,
              :email => Faker::Internet.email,
-             :password_hash => 'password')
+             :password => 'password'})
   end
 
 20.times do |idx|
@@ -24,14 +24,37 @@ Comment.delete_all
   end
 
 70.times do |idx|
-  Comment.create(:commentable_id => rand(1..50),
-                 :body => Faker::Hacker.say_something_smart,
-                 :user_id => rand(1..20)
-                 )
+  choose = rand(1..2)
+  if choose == 1
+    Question.find(rand(1..20)).comments.create(
+                   :body => Faker::Hacker.say_something_smart,
+                   :user_id => rand(1..20)
+                   )
+    else
+    Answer.find(rand(1..20)).comments.create(
+                   :body => Faker::Hacker.say_something_smart,
+                   :user_id => rand(1..20)
+                   )
+    end
   end
 
-60.times do |idx|
-  Vote.create(:votable_id => rand(1..90),
-              :user_id => rand(1..20),
-              :value => 1)
+100.times do |idx|
+  choose = rand(1..3)
+  vote_val = [1,-1].sample
+  if choose == 1
+      Question.find(rand(1..20)).votes.create(
+                   :value => vote_val,
+                   :user_id => rand(1..20)
+                   )
+    elsif choose == 2
+      Answer.find(rand(1..50)).votes.create(
+                   :value => vote_val,
+                   :user_id => rand(1..20)
+                   )
+    else
+    Comment.find(rand(1..70)).votes.create(
+                     :value => vote_val,
+                     :user_id => rand(1..20)
+                     )
+    end
   end
