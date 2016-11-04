@@ -21,6 +21,7 @@ gem 'haml'
 
 gem 'bcrypt'
 gem 'hirb'
+gem 'faker'
 
 group :test do
   gem 'shoulda-matchers'

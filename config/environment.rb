@@ -19,6 +19,7 @@ require 'sinatra/reloader' if development?
 require 'sinatra/json'
 
 require 'bcrypt'
+require 'faker'
 
 # CORS
 require 'sinatra/cross_origin'
