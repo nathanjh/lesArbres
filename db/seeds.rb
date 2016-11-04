@@ -60,3 +60,5 @@ Comment.delete_all
                    )
     end
   end
+end
+
